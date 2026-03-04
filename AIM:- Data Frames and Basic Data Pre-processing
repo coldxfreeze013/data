@@ -1,0 +1,46 @@
+#AIM:- Data Frames and Basic Data Pre-processing
+#a. Read data from CSV and JSON files into a data frame.
+#b. Perform basic data pre-processing tasks such as handling missing values and outliers.
+#c. Manipulate and transform data using functions like filtering, sorting, and grouping.
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import json
+
+# Read Cardio dataset
+df = pd.read_csv(r"C:\Users\Admin\Downloads\CardioGoodFitness.csv")
+
+print(df.head())
+print(df.isnull().sum())
+
+df1 = df.dropna()
+print(df1.head())
+print(df1.isnull().sum())
+
+# Scatter Plot Age vs Fitness
+plt.scatter(df['Age'], df['Fitness'])
+plt.xlabel("Age")
+plt.ylabel("Fitness")
+plt.title("Age vs Fitness")
+plt.show()
+
+# Sorting
+sorted_df = df.sort_values(by='Age', ascending=False)
+print(sorted_df)
+
+# Grouping
+mcount = df.groupby('MaritalStatus')['MaritalStatus'].count()
+print(mcount)
+
+# Read Iris CSV correctly
+df_iris = pd.read_json(r"C:/Users/Admin/Downloads/Iris.json")
+
+print(df_iris.head())
+print(df_iris.isnull().sum())
+
+df2 = df_iris.dropna()
+print(df2.head())
+
+df_iris['species'] = df_iris['species'].fillna('setosa')
+print(df_iris.isnull().sum())
